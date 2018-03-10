@@ -1,7 +1,7 @@
 {
-  "name": "glassic",
+  "name": "gblog",
   "version": "0.1.0",
-  "description": "site generator",
+  "description": "your personal blog engine on github",
   "engines": {
     "npm": ">=3"
   },
@@ -10,7 +10,8 @@
     "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm run start-message",
-    "start": "concurrently -k -r -s first \"npm run test:watch\" \"npm run open:src\" \"npm run lint:watch\"",
+    "start:watch": "concurrently -k -r -s first \"npm run test:watch\" \"npm run open:src\" \"npm run lint:watch\"",
+    "start": "npm run open:src",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -25,9 +26,11 @@
     "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "jest --watch",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
-    "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
+    "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
+    "awspush": "aws s3 sync . s3://moe-work/glassic --profile moe --sse --exclude 'node_modules/*' --delete",
+    "awspull": "aws s3 sync s3://moe-work/glassic . --profile moe --sse --exclude 'node_modules/*' --delete"
   },
-  "author": "Mohammad Eslami",
+  "author": "Mohammad Eslami (@mheslami)",
   "license": "MIT",
   "dependencies": {
     "object-assign": "4.1.0",
@@ -99,7 +102,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/mheslami/gblog"
   },
   "jest": {
     "moduleNameMapper": {
