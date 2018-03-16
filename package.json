@@ -20,6 +20,7 @@
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run lint && npm run test && npm run clean-dist",
     "build": "babel-node tools/build.js && npm run open:dist",
+    "publish": "bash ./tools/publish.sh",
     "test": "jest",
     "test:CI": "babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
@@ -33,6 +34,7 @@
   "author": "Mohammad Eslami (@mheslami)",
   "license": "MIT",
   "dependencies": {
+    "axios": "0.18.0",
     "object-assign": "4.1.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
@@ -43,6 +45,7 @@
     "redux-thunk": "2.1.0"
   },
   "devDependencies": {
+    "@octokit/rest": "15.1.9",
     "autoprefixer": "7.1.4",
     "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
